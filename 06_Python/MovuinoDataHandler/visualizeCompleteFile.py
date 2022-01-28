@@ -5,7 +5,7 @@ import dataSet.GlobalDataSet as gds
 
 device = 'SensitivePen'  # devices available : skateboardXXX3000 / sensitivePen / globalDataSet
 
-folderPath = "/Users/phelippeau/Documents/PhD/Data/Test_Postures/Cross_Thumb/"
+folderPath = "/Users/phelippeau/Documents/PhD/Data/Manip_Montessori"
 fileName = "record"
 
 start = 1
