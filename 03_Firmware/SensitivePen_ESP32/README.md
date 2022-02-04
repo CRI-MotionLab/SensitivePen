@@ -34,7 +34,7 @@ newDat,newDat,newDat,newDat,...
 
 - Wire
 - I2Cdev
-- MPU9250
+- [MPU9250 BolderFlight **v1.0**](https://github.com/bolderflight/mpu9250)
 - FS
 - Adafruit_NeoPixel 
-- Yabl
+- [Yabl](https://github.com/yergin/yabl)
