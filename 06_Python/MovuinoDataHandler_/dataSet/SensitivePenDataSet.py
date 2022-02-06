@@ -172,7 +172,7 @@ class SensitivePenDataSet():
                 elif 180 < psi <= 360:
                     psi -= 360
                 """
-            self.angle_a_m.append(np.arcsin(np.linalg.norm(np.cross(self.acceleration_lp[k], self.magnetometer_lp[k])/(self.normAcceleration_lp[k]*self.normMagnetometer_lp[k])))*180/np.pi)
+            self.angle_a_m.append(np.arcsin(np.linalg.norm(np.cross(self.acceleration_lp[k], self.magnetometer[k])/(self.normAcceleration[k]*self.normMagnetometer[k])))*180/np.pi)
             self.sensitivePenAngles.append(np.array([psi, theta]))
             self.theta.append(theta)
             self.psi.append(psi)
