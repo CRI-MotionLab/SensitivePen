@@ -45,7 +45,7 @@ print("Theta : -> mean : {}, -> sigma : {}".format(mean_theta, sig_theta))
 
 plt.plot([index_init*Te, index_init*Te],[-10,400],"black")
 plt.plot([index_end*Te, index_end*Te],[-10,400],"black")
-sensitivPenDataSet.DispOnlyPenAngles()
+sensitivPenDataSet.dispOnlyPenAngles()
 
 """
 #Regression :
