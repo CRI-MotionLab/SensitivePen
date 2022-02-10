@@ -31,7 +31,7 @@ public:
 
   void begin();
 
-  void newRecord(String _fileName_);
+  int newRecord(String _fileName_);
   void defineColumns(String cols_);
   void addRow();
 
@@ -53,6 +53,8 @@ public:
   void formatSPIFFS();
   void printStateSPIFFS();
   void listDirectory();
+  int getUsedSpace();
+
 };
 
 MovuinoRecorder::MovuinoRecorder()
@@ -71,7 +73,8 @@ void MovuinoRecorder::begin()
   }
 }
 
-void MovuinoRecorder::newRecord(String _fileName_ = "untitled")
+
+int MovuinoRecorder::newRecord(String _fileName_ = "untitled")
 {
   /*
    * Create the file for the movuino
@@ -92,7 +95,7 @@ void MovuinoRecorder::newRecord(String _fileName_ = "untitled")
   if (!this->file)
   {
     Serial.println("Error opening file for writing");
-    return;
+    return 1;
   }
 
   Serial.print("Create ");
@@ -102,6 +105,7 @@ void MovuinoRecorder::newRecord(String _fileName_ = "untitled")
   this->_initRow = true;
   this->_nRow = 0;
   Serial.println("Start recording...");
+  return 0;
 }
 
 void MovuinoRecorder::stop()
@@ -229,6 +233,14 @@ void MovuinoRecorder::printStateSPIFFS()
   Serial.print(SPIFFS.usedBytes());
   Serial.println("byte");
   Serial.println();
+}
+
+int MovuinoRecorder::getUsedSpace()
+{
+  /*
+    * Get the memory used in percent
+  */
+  return (((float)SPIFFS.usedBytes() / (float)SPIFFS.totalBytes())  * 100);
 }
 
 void MovuinoRecorder::listDirectory()
