@@ -1,4 +1,4 @@
-19289691495311510
+19465815522523566
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -58713,6 +58713,13 @@ Hirose DF12 Pattern with metal fitting, 32 positions
 36
 36
 MovuinoESP8266
+DF12-36-DP-NL-noPad
+Hirose DF12 Pattern with metal fitting, 32 positions
+
+0
+36
+36
+MovuinoESP8266
 ESP-12-ALT
 
 
@@ -58720,7 +58727,7 @@ ESP-12-ALT
 16
 16
 MovuinoESP8266
-LCSC145875-3.5*3
+LCSC145875-3.5x3
 Korean Hroparts Elec K2-1821SN-A4SW-06 
 LCSC Part # C145875
 3.5*3mm
@@ -82432,182 +82439,6 @@ transformer flyback
 0
 10
 10
-V0.99.3-ESP12-3-mech
-0402-CAP
-<b>CAPACITOR</b><p>
-chip
-
-0
-2
-2
-V0.99.3-ESP12-3-mech
-0402-JUMPER-CLOSED
-<b>CAPACITOR</b><p>
-chip
-
-0
-2
-2
-V0.99.3-ESP12-3-mech
-0402-JUMPER3-1-2-CLOSED
-<b>CAPACITOR</b><p>
-chip
-
-0
-3
-3
-V0.99.3-ESP12-3-mech
-0402-RES
-<b>CAPACITOR</b><p>
-chip
-
-0
-2
-2
-V0.99.3-ESP12-3-mech
-BME280
-<p>Source: http://ae-bst.resource.bosch.com/media/products/dokumente/bme280/BST-BME280_DS001-09.pdf</p>
-
-0
-8
-8
-V0.99.3-ESP12-3-mech
-DF12-36-DP-NL
-Hirose DF12 Pattern with metal fitting, 32 positions
-
-0
-36
-36
-V0.99.3-ESP12-3-mech
-ESP-12-ALT
-
-
-0
-16
-16
-V0.99.3-ESP12-3-mech
-LCSC145875-3.5*3
-Korean Hroparts Elec K2-1821SN-A4SW-06 
-LCSC Part # C145875
-3.5*3mm
-
-0
-4
-4
-V0.99.3-ESP12-3-mech
-LEAD-QFN24-MPU9250
-
-
-0
-24
-24
-V0.99.3-ESP12-3-mech
-LED-0603-LCSC90692
-
-
-0
-2
-2
-V0.99.3-ESP12-3-mech
-LED3535
-
-
-0
-4
-4
-V0.99.3-ESP12-3-mech
-LOGO_CRI-NEW-BMP10MM-BOTTOM
-
-
-0
-0
-0
-V0.99.3-ESP12-3-mech
-LOGO_MOVUINO_BMP_11MM-BOTTOM
-Used parameters 0.007
-
-0
-0
-0
-V0.99.3-ESP12-3-mech
-MICRO-USB5+6P-SMD-0.65-AB-TB-LCSC10418
-
-
-0
-11
-11
-V0.99.3-ESP12-3-mech
-PAD-1X1.5_NOSILK
-1.5 x 2.0mm SMT pad (no solder paste)
-
-0
-1
-1
-V0.99.3-ESP12-3-mech
-PWR2P_1.0
-
-
-0
-4
-4
-V0.99.3-ESP12-3-mech
-QFN24_4MM_SMSC
-
-
-0
-25
-25
-V0.99.3-ESP12-3-mech
-R0402-SMALL-TDOCU
-<b>RESISTOR 0402 smaller footrpint according to 
-https://www.youtube.com/watch?v=zyXzorducoI
-<br>
-- Name , Value and Outline on tDocu
-</b>
-
-0
-2
-2
-V0.99.3-ESP12-3-mech
-SOD-123
-<b>SOD-123</b>
-<p>Source: http://www.diodes.com/datasheets/ds30139.pdf</p>
-
-0
-2
-2
-V0.99.3-ESP12-3-mech
-SOT-323
-SOT23-3
-
-0
-3
-3
-V0.99.3-ESP12-3-mech
-SOT23-5
-<b>Small Outline Transistor</b> - 5 Pin
-
-0
-5
-5
-V0.99.3-ESP12-3-mech
-SOT23-R
-<b>SOT23</b> - Reflow soldering
-
-0
-3
-3
-V0.99.3-ESP12-3-mech
-TDFN12
-TDFN12 package: 2x3mm, 0.5mm-pitch<br/>
-Created for the STM6600/6601: http://www.st.com/web/en/resource/technical/document/datasheet/CD00226957.pdf<br/>
-http://www.digikey.com/product-search/en?vendor=0&keywords=stm6601d&stock=1<br/>
-<br/>
-Took their recommended footprint and lengthened the pads for hand soldering.
-
-0
-12
-12
 Valve
 Valve_ECC-83-1
 Valve ECC-83-1 round pins
