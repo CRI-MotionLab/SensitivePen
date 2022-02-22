@@ -30,7 +30,7 @@ class SensitivePenDataSet(MovuinoDataSet):
         MovuinoDataSet.DataManage(self)
 
         # --- Getting initial euler angles
-        initRotationMatrix = gam.rotationMatrixCreation(self.acceleration_lp[15], self.magnetometer_lp[15])
+        initRotationMatrix = gam.rotationMatrixCreation(self.acceleration_lp[12], self.magnetometer_lp[12])
         self.initPsi = math.atan2(initRotationMatrix[0, 1], initRotationMatrix[0,0])
 
         for k in range(len(self.time)):
