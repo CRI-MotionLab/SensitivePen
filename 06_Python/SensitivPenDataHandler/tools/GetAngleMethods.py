@@ -44,9 +44,9 @@ def rotationMatrixCreation(u, v):
     :param v: vector
     :return: Rotation matrix
     """
-    #normalisation
+    #normalisation (NED)
     D = u / np.linalg.norm(u)
-    m = v / np.linalg.norm(v)
+    m = v / np.linalg.norm(v) #~B
 
     #coordinates creation
     E = np.cross(D, m)

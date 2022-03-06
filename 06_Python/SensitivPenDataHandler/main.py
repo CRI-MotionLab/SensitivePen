@@ -1,23 +1,26 @@
 import dataSet.SensitivePenDataSet as sp
-import tools.FilterMethods as fm
+import tools.filterMethods as fm
 import tools.features_extraction_scripts.runFeature as ft
 import os
 import numpy as np
 
+"""
+Extract raw data from a Sensitiv Pen. 
+It calculates right after the extraction the norm of basic movuino data (acceleration, gyroscope and magnetomter) and
+sensitiv pen angles (psi and theta).
+This new calculated  data are stored in the same file.
+
+You should specify the folder path and the serial port of the movuino/sensitiv pen
+"""
 
 ############   SETTINGS   #############
-device = "sensitiPen"
-folderPath = "..\\..\\08_DataPen\\Data_Children\\01_raw_data\\"
+
+folderPath = "..\\..\\08_DataPen\\Data_Postures\\Manip_101221_garche\\01_raw_data\\"
 
 fileName = "record"  # generic name numbers will be added for duplicates
 serialPort = 'COM4'
 
-filter = 1
-
-sep = ","
-decimal = "."
-
-###################################
+#######################################
 
 # --------- Data Extraction from Movuino ----------
 """
@@ -31,22 +34,12 @@ for filename in os.listdir(folderPath):
     if os.path.basename(filename).endswith("csv"):
         sensitivPenDataSet = sp.SensitivePenDataSet(folderPath + filename)
 
-        """
-        #Filtering
-        sensitivPenDataSet.acceleration_lp = fm.MeanFilter(sensitivPenDataSet.acceleration, filter)
-        sensitivPenDataSet.gyroscope_lp = fm.MeanFilter(sensitivPenDataSet.gyroscope, filter)
-        sensitivPenDataSet.magnetometer_lp = fm.MeanFilter(sensitivPenDataSet.magnetometer, filter)
-        """
         #ComputeAngles
         sensitivPenDataSet.computePenAngles()
 
-        #FeaturesDifference between runcode et runfeatures extract
-        #ft.getDataSetFeatures(pathfeatures)
+        #Stock new calculated data in the csv : norm, and angles
+        sensitivPenDataSet.stockData(folderPath + filename)
 
-        #stock in processed.csv
-        treated_filepath = os.path.dirname(sensitivPenDataSet.filepath) + "\\..\\02_treated_data\\" + sensitivPenDataSet.filename[:-4] + "_treated_" + sensitivPenDataSet.name + ".csv"
-        sensitivPenDataSet.stockData(treated_filepath)
-        sensitivPenDataSet.dispProcessedData()
 
 
 

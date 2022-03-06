@@ -1,11 +1,11 @@
 import pandas as pd
 import numpy as np
 import serial
-import tools.DisplayFunctions as df
+import tools.displayFunctions as df
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.ticker import MultipleLocator
-import tools.GetAngleMethods as gam
+import tools.getAngleMethods as gam
 import os
 import math
 
@@ -13,13 +13,15 @@ import math
 class SensitivePenDataSet():
     """
     Class that represent a data set of the sensitiv pen.
+    It allows the user to have easily acces to basic movuino data : ax,ay,az,gx,gy,gz,mx,my,mz
+    It calulates in the constructor the norm of this basic movuino data.
+
 
     """
     def __init__(self, filepath):
         """
         Constructor of the sensitivePen
         :param filepath: filepath of the raw data set
-        :param nbPointfilter: level of filtering for the datamanage
         """
         self.name = "SensitivePen"
 
@@ -56,10 +58,12 @@ class SensitivePenDataSet():
 
         # Relevant angle for the pen
         try :
+            #
             self.psi = np.array(self.rawData['psi'])
             self.theta = np.array(self.rawData['theta'])
+            self.angle_a_m = np.array(self.rawData["angle_acc_mag"])
         except (KeyError):
-            self.theta, self.psi, self.angle_a_m = self.computePenAngles()
+            pass
 
 
     def computePenAngles(self):
@@ -71,7 +75,7 @@ class SensitivePenDataSet():
         """
         # --- Getting initial euler angles
         print("--- Calculating Sensitive Pen's angles ---")
-        #We evaluate here the initial angle of the pen
+        #We evaluate here the initial angle of the pen         (ax,ay,az)(t=0)          (mx,my,mz)(t=0)
         initRotationMatrix = gam.rotationMatrixCreation(self.acceleration[:,0], self.magnetometer[:,0])
         self.initPsi = math.atan2(initRotationMatrix[0, 1], initRotationMatrix[0, 0])
         inclinaison = 0
@@ -80,7 +84,7 @@ class SensitivePenDataSet():
         angle_a_m = []
 
         for k in range(len(self.time)):
-            # --- Getting rotation matrix from filtered data
+            # --- Getting rotation matrix from filtered data (ax,ay,az)(t=tk) ~ g         (mx,my,mz)(t=tk)
             rotationMatrix = gam.rotationMatrixCreation(self.acceleration[:,k], self.magnetometer[:,k])
 
             # --- Get inclinaison of the pen (theta)
@@ -110,7 +114,10 @@ class SensitivePenDataSet():
             list_theta.append(theta)
             list_psi.append(psi)
 
-        return list_theta, list_psi, angle_a_m
+            self.angle_a_m = np.array(angle_a_m)
+            self.theta = np.array(list_theta)
+            self.psi = np.array(list_psi)
+        return
 
     #--------- FILE MANAGE Functions -------------------
     def stockData(self, filepath):
@@ -120,6 +127,7 @@ class SensitivePenDataSet():
         :param folderpath:
         :return:
         """
+
         dir = os.path.dirname(filepath)
         if not os.path.exists(os.path.dirname(filepath)) :
             os.makedirs(dir)
@@ -128,6 +136,7 @@ class SensitivePenDataSet():
         self.rawData["normGyr"] = self.normGyroscope
         self.rawData["psi"] = self.psi
         self.rawData["theta"] = self.theta
+        self.rawData["angle_acc_mag"] = self.angle_a_m
 
         self.rawData.to_csv(filepath, sep=",", index=False, index_label=False)
 
@@ -179,6 +188,10 @@ class SensitivePenDataSet():
 
     #--------- DISPLAY Functions -----------------------
     def dispRawData(self):
+        """
+        Display only basic movuino data
+        :return:
+        """
         time_list = self.time
         if time_list[-1]%1000 != 0:
             time_list = [t/1000 for t in time_list]
@@ -198,7 +211,10 @@ class SensitivePenDataSet():
         plt.show()
 
     def dispProcessedData(self):
-
+        """
+        Display norm, angles and basic movuino data
+        :return:
+        """
         parameters = {'axes.labelsize': 5,
                       'axes.titlesize': 10}
         plt.rcParams.update(parameters)
@@ -266,6 +282,10 @@ class SensitivePenDataSet():
         plt.show()
 
     def dispOnlyPenAngles(self):
+        """
+        Display pen angles
+        :return:
+        """
         print("Plotting angles from : {}".format(os.path.basename(self.filepath)))
         time_list = list(self.rawData["time"])
         if time_list[-1]%1000 != 0:

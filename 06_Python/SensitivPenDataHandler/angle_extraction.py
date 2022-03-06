@@ -3,6 +3,10 @@ import tools.angleModelUtilities as amu
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+Program that extract statistical features of the angle of the pen.
+"""
+
 ############   SETTINGS   #############
 device = "sensitiPen"
 folderPath = "..\\..\\08_DataPen\\Data_postures\\Manip_101221_garche\\02_treated_data\\"
@@ -12,8 +16,8 @@ decimal = "."
 
 
 stationnarity_interval = [7, 23] #Intervalle en sec
-stationnarity_interval[0] *= 1000
-stationnarity_interval[1] *= 1000
+#stationnarity_interval[0] *= 1000
+#stationnarity_interval[1] *= 1000
 print(stationnarity_interval)
 ###################################
 
@@ -27,8 +31,8 @@ index_end = int(stationnarity_interval[1]*1/Te)
 print("Index init stationary interval : {}".format(index_init))
 print("Index end stationary interval : {}".format(index_end))
 
-stationary_psi = sensitivPenDataSet.sensitivePenAngles[index_init:index_end, 0]
-stationary_theta = sensitivPenDataSet.sensitivePenAngles[index_init:index_end, 1]
+stationary_psi = sensitivPenDataSet.psi[index_init:index_end]
+stationary_theta = sensitivPenDataSet.theta[index_init:index_end]
 
 #Statistics calcul for psi and theta
 
