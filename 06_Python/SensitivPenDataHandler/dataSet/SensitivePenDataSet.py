@@ -220,8 +220,8 @@ class SensitivePenDataSet():
         plt.rcParams.update(parameters)
         time_list = list(self.rawData["time"])
 
-        if time_list[-1]%5000 != 0:
-            time_list = [t/5000 for t in time_list]
+        if time_list[-1]%1000 != 0:
+            time_list = [t/1000 for t in time_list]
         df.plotVect(time_list, self.acceleration, 'Acceleration (m/s2)', 331)
         df.plotVect(time_list, self.magnetometer, 'Magnetometer', 332)
         df.plotVect(time_list, self.gyroscope, 'Gyroscope (deg/s)', 333)

@@ -9,8 +9,8 @@ Program that extract statistical features of the angle of the pen.
 
 ############   SETTINGS   #############
 device = "sensitiPen"
-folderPath = "..\\..\\08_DataPen\\Data_postures\\Manip_101221_garche\\02_treated_data\\"
-filename = "B6_sentence_en_treated_SensitivePen.csv"
+folderPath = "..\\..\\08_DataPen\\Data_postures\\Manip_101221_garche\\01_raw_data\\"
+filename = "B6_sentence_en.csv"
 sep = ","
 decimal = "."
 
@@ -23,7 +23,7 @@ print(stationnarity_interval)
 
 # -------- Data processing ----------------------
 sensitivPenDataSet = sp.SensitivePenDataSet(folderPath + filename)
-Te = sensitivPenDataSet.Te
+Te = sensitivPenDataSet.Te/1000
 print("sample frequency : " + str(1 / Te))
 
 index_init = int(stationnarity_interval[0] * 1/Te)

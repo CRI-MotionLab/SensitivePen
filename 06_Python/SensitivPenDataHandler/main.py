@@ -15,7 +15,7 @@ You should specify the folder path and the serial port of the movuino/sensitiv p
 
 ############   SETTINGS   #############
 
-folderPath = "..\\..\\08_DataPen\\Data_Postures\\Manip_101221_garche\\01_raw_data\\"
+folderPath = "..\\..\\08_DataPen\\Data_Postures\\Manip_061221\\01_raw_data\\"
 
 fileName = "record"  # generic name numbers will be added for duplicates
 serialPort = 'COM4'
@@ -27,9 +27,8 @@ serialPort = 'COM4'
 Extract data from the serial port and stock it into a csv file
 """
 print("Data extraction..")
-sp.SensitivePenDataSet.movuinoExtraction(serialPort, folderPath + fileName)
+#sp.SensitivePenDataSet.movuinoExtraction(serialPort, folderPath + fileName)
 # -------- Data processing ----------------------
-
 for filename in os.listdir(folderPath):
     if os.path.basename(filename).endswith("csv"):
         sensitivPenDataSet = sp.SensitivePenDataSet(folderPath + filename)
