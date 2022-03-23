@@ -1,4 +1,16 @@
-int sensorPin = A0;    // select the input pin for the potentiometer
+#include "WiFi.h"
+#include <OSCMessage.h>
+
+// WIFI CONFIGURATION
+WiFiUDP Udp; // A UDP instance to let us send and receive packets over UDP
+const IPAddress outIp(192,168,43,157); // IP of the receiver
+// Network settings
+char ssid[] = "hssnadr"; // your network SSID (name)
+char pass[] = "adrien666";  // your network password
+unsigned int localPort = 7777; // local port to listen for OSC packets
+
+// SENSOR CONFIGURATION
+int sensorPin = 38;    // select the input pin for the potentiometer
 int ledPin = 13;      // select the pin for the LED
 int sensorValue = 0;  // variable to store the value coming from the sensor
 
@@ -23,6 +35,20 @@ boolean isPress = false;
 
 void setup() {
   Serial.begin(115200);
+
+  // WIFI connection
+  Serial.println("Wait for WiFi... ");
+  WiFi.begin(ssid, pass);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  Udp.begin(localPort);
+
+  
   pinMode(ledPin, OUTPUT);
 
   // init data collection
@@ -30,6 +56,19 @@ void setup() {
     dataCollect[i] = 0;
   }
 }
+
+void sendOSC(float val_) {
+  // Create message
+  OSCMessage msg("/pressure");
+  msg.add( val_);
+
+  // Send message
+  Udp.beginPacket(outIp, 7777);
+  msg.send(Udp); // Send the bytes to the SLIP stream
+  Udp.endPacket();  // Mark the end of the OSC Packet
+  msg.empty();   // Free space occupied by message
+  delay(10);
+} 
 
 void loop() {
   // update index
@@ -85,7 +124,10 @@ void loop() {
   }
   
   if(millis() - timePrint0 > dlyPrint) {
+    // Serial.print(dataCollect[curIndex]);
+    // Serial.print('\t');
     Serial.print(curMean);
+    sendOSC(curMean);
     Serial.print('\t');
     // Serial.print(curMinWindow);
     /*Serial.print('\t');
@@ -101,7 +143,7 @@ void loop() {
     }
     */
     Serial.println("");
-    analogWrite(ledPin, curMean);
+    // analogWrite(ledPin, curMean);
     timePrint0 = millis();
   }
 }

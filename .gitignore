@@ -45,3 +45,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 *_data/
+02_Electronics/.DS_Store
+02_Electronics/MovuinoShieldPressure_ESP32/.DS_Store
+03_Firmware/.DS_Store
+02_Electronics/MovuinoShieldPressure_ESP32/.DS_Store
