@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+from matplotlib.ticker import MultipleLocator
 def DisplayChartsV3(title, time, shape, *args):
     """
     Display mutlitple charts
@@ -55,6 +55,10 @@ def plotVect(t, v, title, pos):
     fig.plot(t, v[0], color="r", label="x")
     fig.plot(t, v[1], color="green", label="y")
     fig.plot(t, v[2], color="blue", label="z")
+    fig.grid(b=True, which='major')
+    fig.grid(b=True, which='minor', color='#999999', linestyle='dotted')
+    fig.tick_params(axis='y', which='minor', labelsize=10, color="#999999")
+    fig.minorticks_on()
     fig.set_title(title)
 
     return fig

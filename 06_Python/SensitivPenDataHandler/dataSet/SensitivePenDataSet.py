@@ -220,14 +220,25 @@ class SensitivePenDataSet():
         plt.rcParams.update(parameters)
         time_list = list(self.rawData["time"])
 
+        patchX = mpatches.Patch(color='red', label='x')
+        patchY = mpatches.Patch(color='green', label='y')
+        patchZ = mpatches.Patch(color='blue', label='z')
+        #plt.legend(handles=[patchX, patchY, patchZ], loc="upper right",ncol=1)
+
         if time_list[-1]%1000 != 0:
             time_list = [t/1000 for t in time_list]
         df.plotVect(time_list, self.acceleration, 'Acceleration (m/s2)', 331)
+
         df.plotVect(time_list, self.magnetometer, 'Magnetometer', 332)
         df.plotVect(time_list, self.gyroscope, 'Gyroscope (deg/s)', 333)
 
+
+        acc=plt.subplot(331)
+        acc.legend(handles=[patchX, patchY, patchZ], loc="upper left",ncol=1)
+
+
         normMag = plt.subplot(335)
-        normMag.plot(time_list, self.normMagnetometer, color="black")
+        normMag.plot(time_list, self.normMagnetometer, color="black", label="norm")
         normMag.grid(b=True, which='major')
         normMag.grid(b=True, which='minor', color='#999999', linestyle='dotted')
         normMag.tick_params(axis='y', which='minor', labelsize=10, color="#999999")
@@ -237,7 +248,8 @@ class SensitivePenDataSet():
         normMag.set_title("Norm Magnetometer")
 
         normAcc = plt.subplot(334)
-        normAcc.plot(time_list, self.normAcceleration, color="black")
+        normAcc.plot(time_list, self.normAcceleration, color="black", label="norm")
+        normAcc.legend(loc='upper left')
         normAcc.grid(b=True, which='major')
         normAcc.grid(b=True, which='minor', color='#999999', linestyle='dotted')
         normAcc.tick_params(axis='y', which='minor', labelsize=10, color="#999999")
@@ -251,8 +263,8 @@ class SensitivePenDataSet():
         pressure.set_title('Pressure (pressure unit)')
         """
         sensitivePenAngle = plt.subplot(336)
-        sensitivePenAngle.plot(time_list, self.psi, color="red", label='psi')
-        sensitivePenAngle.plot(time_list, self.theta, color="blue", label='theta')
+        sensitivePenAngle.plot(time_list, self.psi,"o", markersize=3,   color="red", alpha=0.3, label='psi')
+        sensitivePenAngle.plot(time_list, self.theta,"+", markersize=3, color="blue", alpha=0.3, label='theta')
         sensitivePenAngle.grid(b=True, which='major')
         sensitivePenAngle.grid(b=True, which='minor', color='#999999', linestyle='dotted')
         sensitivePenAngle.tick_params(axis='y', which='minor', labelsize=12, color="#999999")
@@ -263,10 +275,13 @@ class SensitivePenDataSet():
         sensitivePenAngle.legend(loc='upper right')
         sensitivePenAngle.set_title("Relevant angle (psi, theta) (deg)")
 
+        """
         patchX = mpatches.Patch(color='red', label='x')
         patchY = mpatches.Patch(color='green', label='y')
         patchZ = mpatches.Patch(color='blue', label='z')
-        plt.legend(handles=[patchX, patchY, patchZ], loc="upper right", bbox_to_anchor=(2.5, 3.6), ncol=1)
+        plt.legend(handles=[patchX, patchY, patchZ], loc="upper right",ncol=1)
+        """
+
         plt.title(os.path.basename(self.filepath))
 
         angleAM = plt.subplot(337)
@@ -292,8 +307,8 @@ class SensitivePenDataSet():
             time_list = [t/1000 for t in time_list]
 
         sensitivePenAngle = plt.subplot(111)
-        sensitivePenAngle.plot(time_list, self.psi, color="red", label='psi')
-        sensitivePenAngle.plot(time_list, self.theta, color="blue", label='theta')
+        sensitivePenAngle.plot(time_list, self.psi, "o", markersize=3,   color="red", alpha=0.3, label='psi')
+        sensitivePenAngle.plot(time_list, self.theta, "+", markersize=3, alpha=0.3, color="blue", label='theta')
         sensitivePenAngle.grid(b=True, which='major')
         sensitivePenAngle.grid(b=True, which='minor', color='#999999', linestyle='dotted')
         sensitivePenAngle.tick_params(axis='y', which='minor', labelsize=12, color="#999999")
