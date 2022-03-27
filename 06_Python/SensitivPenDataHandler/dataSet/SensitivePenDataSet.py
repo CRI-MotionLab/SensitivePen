@@ -263,8 +263,8 @@ class SensitivePenDataSet():
         pressure.set_title('Pressure (pressure unit)')
         """
         sensitivePenAngle = plt.subplot(336)
-        sensitivePenAngle.plot(time_list, self.psi,"o", markersize=3,   color="red", alpha=0.3, label='psi')
-        sensitivePenAngle.plot(time_list, self.theta,"+", markersize=3, color="blue", alpha=0.3, label='theta')
+        sensitivePenAngle.plot(time_list, self.psi, markersize=3,   color="red", alpha=0.7, label='psi')
+        sensitivePenAngle.plot(time_list, self.theta, markersize=3, color="blue", alpha=0.7, label='theta')
         sensitivePenAngle.grid(b=True, which='major')
         sensitivePenAngle.grid(b=True, which='minor', color='#999999', linestyle='dotted')
         sensitivePenAngle.tick_params(axis='y', which='minor', labelsize=12, color="#999999")
