@@ -3,11 +3,13 @@
 
 // WIFI CONFIGURATION
 WiFiUDP Udp; // A UDP instance to let us send and receive packets over UDP
-const IPAddress outIp(192,168,43,157); // IP of the receiver
+// const IPAddress outIp(192,168,43,157); // hssnadr
+const IPAddress outIp(192,168,1,10); // LANCRY
 // Network settings
-char ssid[] = "hssnadr"; // your network SSID (name)
-char pass[] = "adrien666";  // your network password
+char ssid[] = "Livebox-FC82"; // your network SSID (name)
+char pass[] = "LANCRY666";  // your network password
 unsigned int localPort = 7777; // local port to listen for OSC packets
+bool _sendOsc = true;
 
 // SENSOR CONFIGURATION
 int sensorPin = 38;    // select the input pin for the potentiometer
@@ -37,16 +39,18 @@ void setup() {
   Serial.begin(115200);
 
   // WIFI connection
-  Serial.println("Wait for WiFi... ");
-  WiFi.begin(ssid, pass);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
+  if(_sendOsc) {
+    Serial.println("Wait for WiFi... ");
+    WiFi.begin(ssid, pass);
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(500);
+    }
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+    Udp.begin(localPort);
   }
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
-  Udp.begin(localPort);
 
   
   pinMode(ledPin, OUTPUT);
@@ -58,16 +62,18 @@ void setup() {
 }
 
 void sendOSC(float val_) {
-  // Create message
-  OSCMessage msg("/pressure");
-  msg.add( val_);
-
-  // Send message
-  Udp.beginPacket(outIp, 7777);
-  msg.send(Udp); // Send the bytes to the SLIP stream
-  Udp.endPacket();  // Mark the end of the OSC Packet
-  msg.empty();   // Free space occupied by message
-  delay(10);
+  if(_sendOsc) {
+    // Create message
+    OSCMessage msg("/pressure");
+    msg.add( val_);
+  
+    // Send message
+    Udp.beginPacket(outIp, 7777);
+    msg.send(Udp); // Send the bytes to the SLIP stream
+    Udp.endPacket();  // Mark the end of the OSC Packet
+    msg.empty();   // Free space occupied by message
+    delay(10);
+  }
 } 
 
 void loop() {
@@ -128,20 +134,18 @@ void loop() {
     // Serial.print('\t');
     Serial.print(curMean);
     sendOSC(curMean);
+    /* Serial.print('\t');
+    Serial.print(curMinWindow);
     Serial.print('\t');
-    // Serial.print(curMinWindow);
-    /*Serial.print('\t');
     Serial.print(curMaxWindow);
     Serial.print('\t');
-    Serial.print(curMeanWindow);*/
-    /*
-    Serial.print('\t');
-    if(isPress) {
-      Serial.print(700);
+    Serial.print(curMeanWindow);
+    Serial.print('\t');*/
+    /* if(isPress) {
+      Serial.print(3000);
     } else {
-      Serial.print(600);
-    }
-    */
+      Serial.print(3600);
+    }*/
     Serial.println("");
     // analogWrite(ledPin, curMean);
     timePrint0 = millis();
