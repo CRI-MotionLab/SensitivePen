@@ -1,9 +1,11 @@
 #include <elapsedMillis.h>
 
 #include "_MOVUINO_ESP32/_MPU9250.h"
+#include "_MOVUINO_ESP32/_WifiOSC.h"
 #include "_MOVUINO_ESP32/_Button.h"
 #include "_MOVUINO_ESP32/_Recorder.h"
 #include "_MOVUINO_ESP32/_Neopixel.h"
+#include "_MOVUINO_ESP32/_PressureSensor.h"
 
 // Color swap
 #define WHITE255 ((255 << 16) | (255 << 8) | 255)
@@ -27,9 +29,12 @@
 #define BATTERY_MAX_VAL 2500 // ~4.2v
 
 MovuinoMPU9250 mpu = MovuinoMPU9250();
+int ip[4] = {192, 168, 1, 18};
+MovuinoWifiOSC osc = MovuinoWifiOSC("COCOBONGO", "welcome!", ip, 7777);
 MovuinoButton button = MovuinoButton();
 MovuinoRecorder recorder = MovuinoRecorder();
 MovuinoNeopixel neopix = MovuinoNeopixel();
+MovuinoPressureSensor pressure = MovuinoPressureSensor();
 
 bool isBtnHold = false;
 bool isCallibrating = false;
@@ -61,16 +66,31 @@ void setup()
   
   // Other
   mpu.begin();
+  osc.begin();
   button.begin();
   recorder.begin();
+  pressure.begin();
   freezBlink(4);
 }
 
 void loop()
 {
+  // -----------------------------------------
+  //                TEST
+  // -----------------------------------------
+  osc.send("/movuino", (int)random(300));
+  pressure.update();
+  delay(50);
+
+  // -----------------------------------------
+  //                UPDATES
+  // -----------------------------------------
   neopix.update();
   button.update();
 
+  // -----------------------------------------
+  //                SERIAL
+  // -----------------------------------------
   if (Serial.available() > 0)
   {
     char serialMessage = Serial.read();
