@@ -1,31 +1,32 @@
 #if !defined(_MOVUINOESP32_PRESSURESENSOR_)
 #define _MOVUINOESP32_PRESSURESENSOR_
 
+#define N 10
+#define WINDOW 100
+#define PIN_PRESSURE 38
+
 class MovuinoPressureSensor
 {
-#define N 100
-#define WINDOW 500
 private:
     int _sensorPin = 38;  // select the input pin for the potentiometer
-    int _ledPin = 13;     // select the pin for the LED
     int _sensorValue = 0; // variable to store the value coming from the sensor
 
-    int dataCollect[N];
-    int curIndex = 0;
-    float curMean = 0.0f;
-    float oldMean = 0.0f;
+    int _dataCollect[N];
+    int _curIndex = 0;
+    float _curMean = 0.0f;
+    float _oldMean = 0.0f;
 
-    int indxWindw = 0;
-    float minWindw = 1024;
-    float maxWindw = 0;
-    float curMinWindow = 0;
-    float curMaxWindow = 1024;
-    float curMeanWindow = 512;
+    int _indxWindw = 0;
+    float _minWindw = 4095;
+    float _maxWindw = 0;
+    float _curMinWindow = 0;
+    float _curMaxWindow = 0;
+    float _curMeanWindow = 0;
 
-    long timePrint0 = 0;
-    int dlyPrint = 10;
+    long _timePrint0 = 0;
+    int _dlyPrint = 10;
 
-    boolean isPress = false;
+    bool _isPress = false;
 
 public:
     MovuinoPressureSensor(/* args */);
@@ -33,6 +34,7 @@ public:
 
     void begin();
     void update();
+    bool isTouch();
 };
 
 MovuinoPressureSensor::MovuinoPressureSensor(/* args */)
@@ -45,102 +47,106 @@ MovuinoPressureSensor::~MovuinoPressureSensor()
 
 void MovuinoPressureSensor::begin()
 {
-    pinMode(this->_ledPin, OUTPUT);
-
     // init data collection
     for (int i = 0; i < N; i++)
     {
-        this->dataCollect[i] = 0;
+        this->_dataCollect[i] = 0;
     }
 }
 
 void MovuinoPressureSensor::update()
 {
-    // update index
-    if (this->curIndex < N && this->curIndex >= 0)
+    if (millis() - this->_timePrint0 > this->_dlyPrint)
     {
-        this->curIndex++;
-    }
-    else
-    {
-        this->curIndex = 0;
-    }
-
-    // update data collection
-    this->dataCollect[this->curIndex] = analogRead(this->_sensorPin);
-
-    // get moving mean
-    this->oldMean = this->curMean;
-    this->curMean = 0.0f;
-    for (int i = 0; i < N; i++)
-    {
-        this->curMean += this->dataCollect[i];
-    }
-    this->curMean /= N;
-
-    // update window
-    if (this->indxWindw < WINDOW)
-    {
-        this->indxWindw++;
-        if (this->curMean < this->minWindw)
+        // update index
+        if (this->_curIndex < N && this->_curIndex >= 0)
         {
-            this->minWindw = this->curMean;
+            this->_curIndex++;
         }
-        if (this->curMean > this->maxWindw)
+        else
         {
-            this->maxWindw = this->curMean;
+            this->_curIndex = 0;
         }
-    }
-    else
-    {
-        // update new thresholds
-        this->curMinWindow = this->minWindw;
-        this->curMaxWindow = this->maxWindw;
-        this->curMeanWindow = (this->curMinWindow + this->curMaxWindow) / 2.0;
 
-        // reset
-        this->indxWindw = 0;
-        this->minWindw = 1024;
-        this->maxWindw = 0;
-    }
+        // update data collection
+        this->_dataCollect[this->_curIndex] = analogRead(PIN_PRESSURE);
 
-    // TEST THRESHOLDS
-    if (!this->isPress)
-    {
-        if (this->oldMean <= this->curMaxWindow && this->curMean >= this->curMaxWindow)
+        // get moving mean
+        this->_oldMean = this->_curMean;
+        this->_curMean = 0.0f;
+        for (int i = 0; i < N; i++)
         {
-            this->isPress = true;
+            this->_curMean += this->_dataCollect[i];
         }
-    }
-    else
-    {
-        if (this->oldMean >= this->curMeanWindow && this->curMean <= this->curMeanWindow)
-        {
-            this->isPress = false;
-        }
-    }
+        this->_curMean /= N;
 
-    if (millis() - this->timePrint0 > this->dlyPrint)
-    {
-        // Serial.print(dataCollect[curIndex]);
+        // update window
+        if (this->_indxWindw < WINDOW)
+        {
+            this->_indxWindw++;
+            if (this->_curMean < this->_minWindw)
+            {
+                this->_minWindw = this->_curMean;
+            }
+            if (this->_curMean > this->_maxWindw)
+            {
+                this->_maxWindw = this->_curMean;
+            }
+        }
+        else
+        {
+            // update new thresholds
+            this->_curMinWindow = this->_minWindw;
+            this->_curMaxWindow = this->_maxWindw;
+            this->_curMeanWindow = (this->_curMinWindow + this->_curMaxWindow) / 2.0;
+
+            // reset
+            this->_indxWindw = 0;
+            this->_minWindw = 4095;
+            this->_maxWindw = 0;
+        }
+        // Serial.print(_dataCollect[_curIndex]);
         // Serial.print('\t');
-        Serial.print(this->curMean);
-        /* Serial.print('\t');
-        Serial.print(curMinWindow);
+        // Serial.print(this->_indxWindw);
+        // Serial.print('\t');
+
+        Serial.print(this->_curMean);
         Serial.print('\t');
-        Serial.print(curMaxWindow);
+        Serial.print(this->_curMinWindow);
         Serial.print('\t');
-        Serial.print(curMeanWindow);
-        Serial.print('\t');*/
-        /* if(isPress) {
-          Serial.print(3000);
+        Serial.print(this->_curMaxWindow);
+        Serial.print('\t');
+        Serial.print(this->_curMeanWindow);
+        Serial.print('\t');
+
+        if(this->isTouch()) {
+          Serial.print(this->_curMeanWindow + 0.5 * (this->_curMeanWindow - this->_curMinWindow));
         } else {
-          Serial.print(3600);
-        }*/
+          Serial.print(this->_curMinWindow + 0.5 * (this->_curMeanWindow - this->_curMinWindow);
+        }
         Serial.println("");
-        // analogWrite(ledPin, curMean);
-        this->timePrint0 = millis();
+        // analogWrite(ledPin, _curMean);
+        this->_timePrint0 = millis();
     }
+}
+
+bool MovuinoPressureSensor::isTouch()
+{
+    if (!this->_isPress)
+    {
+        if (this->_oldMean <= this->_curMeanWindow && this->_curMean >= this->_curMeanWindow)
+        {
+            this->_isPress = true;
+        }
+    }
+    else
+    {
+        if (this->_oldMean >= this->_curMeanWindow && this->_curMean <= this->_curMeanWindow)
+        {
+            this->_isPress = false;
+        }
+    }
+    return this->_isPress;
 }
 
 #endif // _MOVUINOESP32_PRESSURESENSOR_

@@ -1,7 +1,7 @@
 #include <elapsedMillis.h>
 
 #include "_MOVUINO_ESP32/_MPU9250.h"
-#include "_MOVUINO_ESP32/_WifiOSC.h"
+// #include "_MOVUINO_ESP32/_WifiOSC.h"
 #include "_MOVUINO_ESP32/_Button.h"
 #include "_MOVUINO_ESP32/_Recorder.h"
 #include "_MOVUINO_ESP32/_Neopixel.h"
@@ -28,9 +28,14 @@
 #define BATTERY_MIN_VAL 1900 // ~3.3v
 #define BATTERY_MAX_VAL 2500 // ~4.2v
 
-MovuinoMPU9250 mpu = MovuinoMPU9250();
+// Wifi configuration
+char ssid[] = "COCOBONGO";
+char pass[] = "welcome!";
+int port = 7777;
 int ip[4] = {192, 168, 1, 18};
-MovuinoWifiOSC osc = MovuinoWifiOSC("COCOBONGO", "welcome!", ip, 7777);
+
+MovuinoMPU9250 mpu = MovuinoMPU9250();
+// MovuinoWifiOSC osc = MovuinoWifiOSC(ssid, pass, ip, port);
 MovuinoButton button = MovuinoButton();
 MovuinoRecorder recorder = MovuinoRecorder();
 MovuinoNeopixel neopix = MovuinoNeopixel();
@@ -66,7 +71,7 @@ void setup()
   
   // Other
   mpu.begin();
-  osc.begin();
+  // osc.begin();
   button.begin();
   recorder.begin();
   pressure.begin();
@@ -78,9 +83,11 @@ void loop()
   // -----------------------------------------
   //                TEST
   // -----------------------------------------
-  osc.send("/movuino", (int)random(300));
+  // osc.send("/movuino", (int)random(300));
   pressure.update();
-  delay(50);
+  // Serial.println(pressure.isTouch());
+  
+  // delay(50);
 
   // -----------------------------------------
   //                UPDATES
