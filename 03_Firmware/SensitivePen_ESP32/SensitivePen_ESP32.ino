@@ -5,7 +5,7 @@
 #include "_MOVUINO_ESP32/_Button.h"
 #include "_MOVUINO_ESP32/_Recorder.h"
 #include "_MOVUINO_ESP32/_Neopixel.h"
-#include "_MOVUINO_ESP32/_PressureSensor.h"
+#include "_MOVUINO_SHIELDS/_PressureSensor.h"
 
 // Color swap
 #define WHITE255 ((255 << 16) | (255 << 8) | 255)
@@ -85,6 +85,22 @@ void loop()
   // -----------------------------------------
   // osc.send("/movuino", (int)random(300));
   pressure.update();
+  // pressure.printData();
+  Serial.print(pressure.getPressure());
+  Serial.print("\t");
+  if(pressure.isTouch()) {
+    neopix.turnOn();
+    neopix.setColor(BLUE);
+    Serial.print(1);
+    Serial.print("\t");
+    Serial.println(-1);
+  } else {
+    neopix.turnOff();
+    Serial.print(0);
+    Serial.print("\t");
+    Serial.println(0);
+  }
+  delay(50);
   // Serial.println(pressure.isTouch());
   
   // delay(50);
@@ -215,7 +231,7 @@ void loop()
 }
 
 void normalMode() {
-  neopix.setColor(colOn);
+  // neopix.setColor(colOn);
 }
 
 void startRecord()

@@ -2,7 +2,7 @@
 #define _MOVUINOESP32_PRESSURESENSOR_
 
 #define N 10
-#define WINDOW 100
+#define WINDOW 300
 #define PIN_PRESSURE 38
 
 class MovuinoPressureSensor
@@ -23,8 +23,8 @@ private:
     float _curMaxWindow = 0;
     float _curMeanWindow = 0;
 
-    long _timePrint0 = 0;
-    int _dlyPrint = 10;
+    long _timer0 = 0;
+    int _rateTime = 10; // time between data (ms)
 
     bool _isPress = false;
 
@@ -34,7 +34,9 @@ public:
 
     void begin();
     void update();
+    void printData();
     bool isTouch();
+    float getPressure();
 };
 
 MovuinoPressureSensor::MovuinoPressureSensor(/* args */)
@@ -56,8 +58,10 @@ void MovuinoPressureSensor::begin()
 
 void MovuinoPressureSensor::update()
 {
-    if (millis() - this->_timePrint0 > this->_dlyPrint)
+    if (millis() - this->_timer0 > this->_rateTime)
     {
+        this->_timer0 = millis(); // reset
+
         // update index
         if (this->_curIndex < N && this->_curIndex >= 0)
         {
@@ -105,29 +109,29 @@ void MovuinoPressureSensor::update()
             this->_minWindw = 4095;
             this->_maxWindw = 0;
         }
-        // Serial.print(_dataCollect[_curIndex]);
-        // Serial.print('\t');
-        // Serial.print(this->_indxWindw);
-        // Serial.print('\t');
-
-        Serial.print(this->_curMean);
-        Serial.print('\t');
-        Serial.print(this->_curMinWindow);
-        Serial.print('\t');
-        Serial.print(this->_curMaxWindow);
-        Serial.print('\t');
-        Serial.print(this->_curMeanWindow);
-        Serial.print('\t');
-
-        if(this->isTouch()) {
-          Serial.print(this->_curMeanWindow + 0.5 * (this->_curMeanWindow - this->_curMinWindow));
-        } else {
-          Serial.print(this->_curMinWindow + 0.5 * (this->_curMeanWindow - this->_curMinWindow);
-        }
-        Serial.println("");
-        // analogWrite(ledPin, _curMean);
-        this->_timePrint0 = millis();
     }
+}
+
+void MovuinoPressureSensor::printData()
+{
+    Serial.print(this->_curMean);
+    Serial.print('\t');
+    Serial.print(this->_curMinWindow);
+    Serial.print('\t');
+    Serial.print(this->_curMaxWindow);
+    Serial.print('\t');
+    Serial.print(this->_curMeanWindow);
+    Serial.print('\t');
+
+    if (this->isTouch())
+    {
+        Serial.print(this->_curMeanWindow + 0.5 * (this->_curMeanWindow - this->_curMinWindow));
+    }
+    else
+    {
+        Serial.print(this->_curMinWindow + 0.5 * (this->_curMeanWindow - this->_curMinWindow));
+    }
+    Serial.println("");
 }
 
 bool MovuinoPressureSensor::isTouch()
@@ -147,6 +151,19 @@ bool MovuinoPressureSensor::isTouch()
         }
     }
     return this->_isPress;
+}
+
+float MovuinoPressureSensor::getPressure()
+{
+    float press_ = 0.0f;
+    if (this->isTouch())
+    {
+        if (this->_curMaxWindow > this->_curMeanWindow)
+        {
+            press_ = (this->_curMean - this->_curMeanWindow) / (this->_curMaxWindow - this->_curMeanWindow);
+        }
+    }
+    return press_;
 }
 
 #endif // _MOVUINOESP32_PRESSURESENSOR_
