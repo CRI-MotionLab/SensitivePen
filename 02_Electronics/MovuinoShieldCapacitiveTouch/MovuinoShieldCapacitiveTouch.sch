@@ -187,8 +187,6 @@ Text GLabel 9400 4300 2    50   Input ~ 0
 SDA
 Text GLabel 9400 4000 2    50   Input ~ 0
 VDDA
-Text GLabel 9400 4100 2    50   Input ~ 0
-VDDA
 $Comp
 L Device:C C4
 U 1 1 625005E0
@@ -410,6 +408,17 @@ F 1 "VCC" V 3715 4878 50  0000 L CNN
 F 2 "" H 3700 4750 50  0001 C CNN
 F 3 "" H 3700 4750 50  0001 C CNN
 	1    3700 4750
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 6254F966
+P 9400 4100
+F 0 "#PWR?" H 9400 3950 50  0001 C CNN
+F 1 "VCC" V 9415 4228 50  0000 L CNN
+F 2 "" H 9400 4100 50  0001 C CNN
+F 3 "" H 9400 4100 50  0001 C CNN
+	1    9400 4100
 	0    1    1    0   
 $EndComp
 $EndSCHEMATC
