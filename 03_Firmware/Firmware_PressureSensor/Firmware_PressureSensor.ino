@@ -22,18 +22,26 @@ int curIndex = 0;
 float curMean = 0.0f;
 float oldMean = 0.0f;
 
-#define WINDOW 500
+#define WINDOW 1000
 int indxWindw = 0;
 float minWindw = 1024;
 float maxWindw = 0;
 float curMinWindow = 0;
 float curMaxWindow = 1024;
 float curMeanWindow = 512;
+float oldRangeWindow = 512;
 
 long timePrint0 = 0;
 int dlyPrint = 10;
 
 boolean isPress = false;
+
+
+//--------------------------------------
+float last_filtered_value = 0.0f;
+
+// SlidingWindowFilter slidWindFilt = SlidingWindowFilter(10, 10);
+//--------------------------------------
 
 void setup() {
   Serial.begin(115200);
@@ -56,7 +64,7 @@ void setup() {
   pinMode(ledPin, OUTPUT);
 
   // init data collection
-  for(int i=0; i<N; i++) {
+  for (int i = 0; i < N; i++) {
     dataCollect[i] = 0;
   }
 }
@@ -78,7 +86,7 @@ void sendOSC(float val_) {
 
 void loop() {
   // update index
-  if(curIndex < N && curIndex >= 0) {
+  if (curIndex < N && curIndex >= 0) {
     curIndex++;
   }
   else {
@@ -91,26 +99,28 @@ void loop() {
   // get moving mean
   oldMean = curMean;
   curMean = 0.0f;
-  for (int i=0; i<N;i++) {
+  for (int i = 0; i < N; i++) {
     curMean += dataCollect[i];
   }
   curMean /= N;
 
   // update window
-  if(indxWindw < WINDOW) {
+  if (indxWindw < WINDOW) {
     indxWindw++;
-    if(curMean < minWindw) {
+    if (curMean < minWindw) {
       minWindw = curMean;
     }
-    if(curMean > maxWindw) {
+    if (curMean > maxWindw) {
       maxWindw = curMean;
+      curMaxWindow = maxWindw; // TEST CUSTOM
+      curMeanWindow = (curMinWindow + curMaxWindow) / 2.0; // TEST CUSTOM
     }
   }
   else {
     // update new thresholds
     curMinWindow = minWindw;
     curMaxWindow = maxWindw;
-    curMeanWindow = (curMinWindow + curMaxWindow)/2.0;
+    curMeanWindow = (curMinWindow + curMaxWindow) / 2.0;
 
     // reset
     indxWindw = 0;
@@ -119,7 +129,7 @@ void loop() {
   }
 
   // TEST THRESHOLDS
-  if(!isPress) {
+  if (!isPress) {
     if (oldMean <= curMaxWindow && curMean >= curMaxWindow) {
       isPress = true;
     }

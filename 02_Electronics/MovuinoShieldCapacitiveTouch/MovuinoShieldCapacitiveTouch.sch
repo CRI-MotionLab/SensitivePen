@@ -1,0 +1,424 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L DF12_3.0_-36DP-0.5V_86_:DF12_3.0_-36DP-0.5V_86_ J1
+U 1 1 624DA27F
+P 3150 1400
+F 0 "J1" V 2988 1327 50  0000 L CNN
+F 1 "DF12_3.0_-36DP_Female" V 3067 1130 50  0000 L CNN
+F 2 "DF12_3.0_-36DP-0.5V_86_:DF123036DP05V86" H 5300 1700 50  0001 L CNN
+F 3 "https://www.arrow.com/en/products/df12-3.0-36dp-0.5v-86/hirose-electric?region=nac" H 5300 1600 50  0001 L CNN
+F 4 "Conn Board to Board HDR 36 POS 0.5mm Solder ST SMD T/R" H 5300 1500 50  0001 L CNN "Description"
+F 5 "2.3" H 5300 1400 50  0001 L CNN "Height"
+F 6 "798-DF123036DP0.5V86" H 5300 1300 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Hirose-Connector/DF1230-36DP-05V86?qs=zOgoZG1CgI%252Bt2%2FKBWr1g6Q%3D%3D" H 5300 1200 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Hirose" H 5300 1100 50  0001 L CNN "Manufacturer_Name"
+F 9 "DF12(3.0)-36DP-0.5V(86)" H 5300 1000 50  0001 L CNN "Manufacturer_Part_Number"
+	1    3150 1400
+	0    1    1    0   
+$EndComp
+Text Notes 3100 1100 0    50   ~ 0
+TOP
+Text Notes 4750 1100 0    50   ~ 0
+BOTTOM
+$Comp
+L power:VCC #PWR0101
+U 1 1 624F2E1B
+P 5400 3200
+F 0 "#PWR0101" H 5400 3050 50  0001 C CNN
+F 1 "VCC" V 5415 3328 50  0000 L CNN
+F 2 "" H 5400 3200 50  0001 C CNN
+F 3 "" H 5400 3200 50  0001 C CNN
+	1    5400 3200
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VCC #PWR0102
+U 1 1 624F4322
+P 2650 3200
+F 0 "#PWR0102" H 2650 3050 50  0001 C CNN
+F 1 "VCC" V 2665 3327 50  0000 L CNN
+F 2 "" H 2650 3200 50  0001 C CNN
+F 3 "" H 2650 3200 50  0001 C CNN
+	1    2650 3200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 624F4D65
+P 5400 3300
+F 0 "#PWR0103" H 5400 3050 50  0001 C CNN
+F 1 "GND" V 5405 3172 50  0000 R CNN
+F 2 "" H 5400 3300 50  0001 C CNN
+F 3 "" H 5400 3300 50  0001 C CNN
+	1    5400 3300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L DF12_3.0_-36DP-0.5V_86_:DF12_3.0_-36DP-0.5V_86_ J2
+U 1 1 624DC05E
+P 4900 1400
+F 0 "J2" V 4719 1400 50  0000 C CNN
+F 1 "DF12_3.0_-36DP_Male" V 4810 1400 50  0000 C CNN
+F 2 "DF12_3.0_-36DP-0.5V_86_:DF123036DP05V86" H 7050 1700 50  0001 L CNN
+F 3 "https://www.arrow.com/en/products/df12-3.0-36dp-0.5v-86/hirose-electric?region=nac" H 7050 1600 50  0001 L CNN
+F 4 "Conn Board to Board HDR 36 POS 0.5mm Solder ST SMD T/R" H 7050 1500 50  0001 L CNN "Description"
+F 5 "2.3" H 7050 1400 50  0001 L CNN "Height"
+F 6 "798-DF123036DP0.5V86" H 7050 1300 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.co.uk/ProductDetail/Hirose-Connector/DF1230-36DP-05V86?qs=zOgoZG1CgI%252Bt2%2FKBWr1g6Q%3D%3D" H 7050 1200 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Hirose" H 7050 1100 50  0001 L CNN "Manufacturer_Name"
+F 9 "DF12(3.0)-36DP-0.5V(86)" H 7050 1000 50  0001 L CNN "Manufacturer_Part_Number"
+	1    4900 1400
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 624F5CB3
+P 5400 3400
+F 0 "#PWR0104" H 5400 3150 50  0001 C CNN
+F 1 "GND" V 5405 3272 50  0000 R CNN
+F 2 "" H 5400 3400 50  0001 C CNN
+F 3 "" H 5400 3400 50  0001 C CNN
+	1    5400 3400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0105
+U 1 1 624F66D2
+P 2650 3300
+F 0 "#PWR0105" H 2650 3050 50  0001 C CNN
+F 1 "GND" V 2655 3172 50  0000 R CNN
+F 2 "" H 2650 3300 50  0001 C CNN
+F 3 "" H 2650 3300 50  0001 C CNN
+	1    2650 3300
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0106
+U 1 1 624F78DE
+P 2650 3400
+F 0 "#PWR0106" H 2650 3150 50  0001 C CNN
+F 1 "GND" V 2655 3272 50  0000 R CNN
+F 2 "" H 2650 3400 50  0001 C CNN
+F 3 "" H 2650 3400 50  0001 C CNN
+	1    2650 3400
+	0    1    1    0   
+$EndComp
+Text GLabel 4400 1800 0    50   Input ~ 0
+A1
+Text GLabel 3650 1800 2    50   Input ~ 0
+A1
+Text GLabel 2650 3000 0    50   Input ~ 0
+SCL
+Text GLabel 2650 2900 0    50   Input ~ 0
+SDA
+Text GLabel 5400 3000 2    50   Input ~ 0
+SCL
+Text GLabel 5400 2900 2    50   Input ~ 0
+SDA
+$Comp
+L FH12-10S-0.5SH_55_:FH12-10S-0.5SH(55) J3
+U 1 1 624F9B03
+P 8700 1750
+F 0 "J3" H 8928 1846 50  0000 L CNN
+F 1 "FH12-10S-0.5SH(55)" H 8928 1755 50  0000 L CNN
+F 2 "FH12-10S-0:FH12-10S-0.5SH(55)_HIR" H 8700 1750 50  0001 L BNN
+F 3 "" H 8700 1750 50  0001 L BNN
+F 4 "Copyright (C) 2018 Accelerated Designs. All rights reserved" H 8700 1750 50  0001 L BNN "COPYRIGHT"
+F 5 "Hirose" H 8700 1750 50  0001 L BNN "VENDOR"
+F 6 "FH12-10S-0.5SH(55)" H 8700 1750 50  0001 L BNN "MANUFACTURER_PART_NUMBER"
+F 7 "EMA_Colton" H 8700 1750 50  0001 L BNN "BUILT_BY"
+F 8 "file:///C:/Users/ColtonK/Downloads/FH12_CL0698-0052-0-00_2d.pdf" H 8700 1750 50  0001 L BNN "DATASHEET"
+F 9 "Hirose_2020-02-14" H 8700 1750 50  0001 L BNN "SOURCELIBRARY"
+	1    8700 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L FT5316DME:FT5316DME U1
+U 1 1 624FC0FE
+P 8800 4000
+F 0 "U1" H 8800 5467 50  0000 C CNN
+F 1 "FT5316DME" H 8800 5376 50  0000 C CNN
+F 2 "FT5316dme:QFN40P600X600X60-49N" H 8800 4000 50  0001 L CNN
+F 3 "" H 8800 4000 50  0001 L CNN
+	1    8800 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0107
+U 1 1 624FDB62
+P 9400 5100
+F 0 "#PWR0107" H 9400 4850 50  0001 C CNN
+F 1 "GND" V 9405 4972 50  0000 R CNN
+F 2 "" H 9400 5100 50  0001 C CNN
+F 3 "" H 9400 5100 50  0001 C CNN
+	1    9400 5100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0108
+U 1 1 624FE5E3
+P 9400 5000
+F 0 "#PWR0108" H 9400 4750 50  0001 C CNN
+F 1 "GND" V 9405 4872 50  0000 R CNN
+F 2 "" H 9400 5000 50  0001 C CNN
+F 3 "" H 9400 5000 50  0001 C CNN
+	1    9400 5000
+	0    -1   -1   0   
+$EndComp
+Text GLabel 9400 4900 2    50   Input ~ 0
+VDDD
+Text GLabel 9400 4200 2    50   Input ~ 0
+SCL
+Text GLabel 9400 4300 2    50   Input ~ 0
+SDA
+Text GLabel 9400 4000 2    50   Input ~ 0
+VDDA
+$Comp
+L Device:C C4
+U 1 1 625005E0
+P 7550 4650
+F 0 "C4" H 7665 4696 50  0000 L CNN
+F 1 "1uF" H 7665 4605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 7588 4500 50  0001 C CNN
+F 3 "~" H 7550 4650 50  0001 C CNN
+	1    7550 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C3
+U 1 1 62500BAC
+P 7050 4650
+F 0 "C3" H 7165 4696 50  0000 L CNN
+F 1 "1uF" H 7165 4605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 7088 4500 50  0001 C CNN
+F 3 "~" H 7050 4650 50  0001 C CNN
+	1    7050 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C2
+U 1 1 62500E36
+P 6550 4650
+F 0 "C2" H 6665 4696 50  0000 L CNN
+F 1 "1uF" H 6665 4605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 6588 4500 50  0001 C CNN
+F 3 "~" H 6550 4650 50  0001 C CNN
+	1    6550 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 62500FA3
+P 6050 4650
+F 0 "C1" H 6165 4696 50  0000 L CNN
+F 1 "1uF" H 6165 4605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 6088 4500 50  0001 C CNN
+F 3 "~" H 6050 4650 50  0001 C CNN
+	1    6050 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0109
+U 1 1 625054A6
+P 6850 4300
+F 0 "#PWR0109" H 6850 4050 50  0001 C CNN
+F 1 "GND" H 6855 4127 50  0000 C CNN
+F 2 "" H 6850 4300 50  0001 C CNN
+F 3 "" H 6850 4300 50  0001 C CNN
+	1    6850 4300
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:VCC #PWR0110
+U 1 1 62505E9B
+P 7050 5350
+F 0 "#PWR0110" H 7050 5200 50  0001 C CNN
+F 1 "VCC" H 7065 5523 50  0000 C CNN
+F 2 "" H 7050 5350 50  0001 C CNN
+F 3 "" H 7050 5350 50  0001 C CNN
+	1    7050 5350
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:VCC #PWR0111
+U 1 1 62506ACA
+P 5550 5350
+F 0 "#PWR0111" H 5550 5200 50  0001 C CNN
+F 1 "VCC" H 5565 5523 50  0000 C CNN
+F 2 "" H 5550 5350 50  0001 C CNN
+F 3 "" H 5550 5350 50  0001 C CNN
+	1    5550 5350
+	-1   0    0    1   
+$EndComp
+Text GLabel 6550 5300 3    50   Input ~ 0
+VDDD
+Text GLabel 6050 5300 3    50   Input ~ 0
+VDDA
+$Comp
+L Device:R R1
+U 1 1 62507B3C
+P 5550 5200
+F 0 "R1" H 5620 5246 50  0000 L CNN
+F 1 "300 Ohm" H 5620 5155 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 5480 5200 50  0001 C CNN
+F 3 "~" H 5550 5200 50  0001 C CNN
+	1    5550 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6050 4500 6050 4350
+Wire Wire Line
+	6050 4350 6550 4350
+Wire Wire Line
+	7550 4350 7550 4500
+Wire Wire Line
+	7050 4500 7050 4350
+Connection ~ 7050 4350
+Wire Wire Line
+	7050 4350 7550 4350
+Wire Wire Line
+	6550 4500 6550 4350
+Connection ~ 6550 4350
+Wire Wire Line
+	6550 4350 6850 4350
+Wire Wire Line
+	6850 4350 6850 4300
+Connection ~ 6850 4350
+Wire Wire Line
+	6850 4350 7050 4350
+Wire Wire Line
+	6550 4800 6550 5300
+Wire Wire Line
+	6050 4800 6050 4900
+Wire Wire Line
+	6050 4900 5550 4900
+Connection ~ 6050 4900
+Wire Wire Line
+	6050 4900 6050 5300
+Wire Wire Line
+	5550 4900 5550 5050
+Wire Wire Line
+	7550 4800 7550 5000
+$Comp
+L power:GND #PWR0112
+U 1 1 6251309E
+P 8200 2800
+F 0 "#PWR0112" H 8200 2550 50  0001 C CNN
+F 1 "GND" V 8205 2672 50  0000 R CNN
+F 2 "" H 8200 2800 50  0001 C CNN
+F 3 "" H 8200 2800 50  0001 C CNN
+	1    8200 2800
+	0    1    1    0   
+$EndComp
+Text GLabel 8200 2900 0    50   Input ~ 0
+TX1
+Text GLabel 8200 3000 0    50   Input ~ 0
+TX2
+Text GLabel 8200 3100 0    50   Input ~ 0
+TX3
+Text GLabel 8200 3200 0    50   Input ~ 0
+TX4
+Text GLabel 9400 3900 2    50   Input ~ 0
+RX1
+Text GLabel 9400 3800 2    50   Input ~ 0
+RX2
+Text GLabel 9400 3700 2    50   Input ~ 0
+RX3
+Text GLabel 9400 3600 2    50   Input ~ 0
+RX4
+Wire Wire Line
+	7050 4800 7050 5100
+Wire Wire Line
+	8200 5000 7550 5000
+Wire Wire Line
+	8200 5100 7050 5100
+Connection ~ 7050 5100
+Wire Wire Line
+	7050 5100 7050 5350
+Text GLabel 8300 1250 0    50   Input ~ 0
+TX1
+Text GLabel 8300 1350 0    50   Input ~ 0
+TX2
+Text GLabel 8300 2050 0    50   Input ~ 0
+TX3
+Text GLabel 8300 2150 0    50   Input ~ 0
+TX4
+Text GLabel 8300 1450 0    50   Input ~ 0
+RX1
+Text GLabel 8300 1550 0    50   Input ~ 0
+RX2
+Text GLabel 8300 1650 0    50   Input ~ 0
+RX3
+Text GLabel 8300 1750 0    50   Input ~ 0
+RX4
+Text GLabel 8300 1850 0    50   Input ~ 0
+RX5
+Text GLabel 8300 1950 0    50   Input ~ 0
+RX6
+Text GLabel 9400 3500 2    50   Input ~ 0
+RX5
+Text GLabel 9400 3400 2    50   Input ~ 0
+RX6
+$Comp
+L Connector:Conn_01x06_Male J4
+U 1 1 6251BED7
+P 3500 4950
+F 0 "J4" H 3608 5331 50  0000 C CNN
+F 1 "Conn_01x06_Male" H 3608 5240 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 3500 4950 50  0001 C CNN
+F 3 "~" H 3500 4950 50  0001 C CNN
+	1    3500 4950
+	1    0    0    -1  
+$EndComp
+Text GLabel 3700 5150 2    50   Input ~ 0
+SCL
+Text GLabel 3700 5050 2    50   Input ~ 0
+SDA
+$Comp
+L power:GND #PWR0113
+U 1 1 6251E068
+P 3700 5250
+F 0 "#PWR0113" H 3700 5000 50  0001 C CNN
+F 1 "GND" V 3705 5122 50  0000 R CNN
+F 2 "" H 3700 5250 50  0001 C CNN
+F 3 "" H 3700 5250 50  0001 C CNN
+	1    3700 5250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:VCC #PWR0114
+U 1 1 6251ED86
+P 3700 4750
+F 0 "#PWR0114" H 3700 4600 50  0001 C CNN
+F 1 "VCC" V 3715 4878 50  0000 L CNN
+F 2 "" H 3700 4750 50  0001 C CNN
+F 3 "" H 3700 4750 50  0001 C CNN
+	1    3700 4750
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 6254F966
+P 9400 4100
+F 0 "#PWR?" H 9400 3950 50  0001 C CNN
+F 1 "VCC" V 9415 4228 50  0000 L CNN
+F 2 "" H 9400 4100 50  0001 C CNN
+F 3 "" H 9400 4100 50  0001 C CNN
+	1    9400 4100
+	0    1    1    0   
+$EndComp
+$EndSCHEMATC
