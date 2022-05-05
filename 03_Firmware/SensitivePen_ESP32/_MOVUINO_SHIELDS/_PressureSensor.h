@@ -1,8 +1,8 @@
 #if !defined(_MOVUINOESP32_PRESSURESENSOR_)
 #define _MOVUINOESP32_PRESSURESENSOR_
 
-#define N 10
-#define WINDOW 300
+#define N 3
+#define WINDOW 50
 #define PIN_PRESSURE 38
 
 class MovuinoPressureSensor
@@ -156,14 +156,16 @@ bool MovuinoPressureSensor::isTouch()
 float MovuinoPressureSensor::getPressure()
 {
     float press_ = 0.0f;
-    if (this->isTouch())
-    {
-        if (this->_curMaxWindow > this->_curMeanWindow)
-        {
-            press_ = (this->_curMean - this->_curMeanWindow) / (this->_curMaxWindow - this->_curMeanWindow);
-        }
-    }
-    return press_;
+    press_ = (this->_curMean - this->_curMeanWindow) / (this->_curMaxWindow - this->_curMinWindow);
+    // if (this->isTouch())
+    // {
+    //     if (this->_curMaxWindow > this->_curMeanWindow)
+    //     {
+    //         press_ = (this->_curMean - this->_curMeanWindow) / (this->_curMaxWindow - this->_curMeanWindow);
+    //     }
+    // }
+    // return press_;
+    return this->_curMean;
 }
 
 #endif // _MOVUINOESP32_PRESSURESENSOR_
