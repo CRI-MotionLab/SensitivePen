@@ -220,9 +220,6 @@ void loop()
         freezBlink(2);
         if (!recorder.isRecording())
         {
-          Serial.println("-------------------");
-          Serial.println("START CALLIBRATION");
-          Serial.println("-------------------");
           mpu.magnometerCalibration();
           button.reset(); // force reset
           neopix.blinkOn(100, 2);
