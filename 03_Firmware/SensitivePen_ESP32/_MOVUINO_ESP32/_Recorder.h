@@ -31,7 +31,7 @@ public:
 
   void begin();
 
-  void newRecord(String _fileName_);
+  void newRecord(String fileName_);
   void defineColumns(String cols_);
   void addRow();
 
@@ -71,7 +71,7 @@ void MovuinoRecorder::begin()
   }
 }
 
-void MovuinoRecorder::newRecord(String _fileName_ = "untitled")
+void MovuinoRecorder::newRecord(String fileName_ = "untitled")
 {
   /*
    * Create the file for the movuino
@@ -85,7 +85,7 @@ void MovuinoRecorder::newRecord(String _fileName_ = "untitled")
   this->_fileName += indxChar_[2];
 
   // add file name
-  this->_fileName += "_" + _fileName_;
+  this->_fileName += "_" + fileName_;
   this->_filePath = this->_dirPath + "/" + this->_fileName + ".txt";
   this->file = SPIFFS.open(this->_filePath, "w");
 

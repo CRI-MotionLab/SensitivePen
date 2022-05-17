@@ -22,6 +22,7 @@ public:
 
   void begin();
   void update();
+  void reset();
 
   static void onPress();
   static void onRelease();
@@ -59,6 +60,14 @@ void MovuinoButton::update()
   __isDoubleTap = false;
 
   this->_button.update();
+}
+
+void MovuinoButton::reset()
+{
+  __isPressed = false;
+  __isReleased = false;
+  __isDoubleTap = false;
+  __isHold = false;
 }
 
 void MovuinoButton::onPress()

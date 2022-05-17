@@ -8,7 +8,6 @@
 class MovuinoPressureSensor
 {
 private:
-    int _sensorPin = 38;  // select the input pin for the potentiometer
     int _sensorValue = 0; // variable to store the value coming from the sensor
 
     int _dataCollect[N];

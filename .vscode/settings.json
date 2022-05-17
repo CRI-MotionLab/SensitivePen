@@ -23,5 +23,6 @@
         "utility": "cpp",
         "typeinfo": "cpp",
         "chrono": "cpp"
-    }
+    },
+    "liveServer.settings.port": 5501
 }

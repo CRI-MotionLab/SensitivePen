@@ -42,11 +42,10 @@ MovuinoNeopixel neopix = MovuinoNeopixel();
 MovuinoPressureSensor pressure = MovuinoPressureSensor();
 
 bool isBtnHold = false;
-bool isCallibrating = false;
 elapsedMillis dlyRec;
 
 String recordId = "SensitivePen";
-String colsId = "ax,ay,az,gx,gy,gz,mx,my,mz";
+String colsId = "ax,ay,az,gx,gy,gz,mx,my,mz,pressure";
 
 int timeHoldCallib = 1800;
 
@@ -84,23 +83,23 @@ void loop()
   //                TEST
   // -----------------------------------------
   // osc.send("/movuino", (int)random(300));
-  pressure.update();
-  // pressure.printData();
-  Serial.print(pressure.getPressure());
-  Serial.print("\t");
-  if(pressure.isTouch()) {
-    neopix.turnOn();
-    neopix.setColor(BLUE);
-    Serial.print(1);
-    Serial.print("\t");
-    Serial.println(-1);
-  } else {
-    neopix.turnOff();
-    Serial.print(0);
-    Serial.print("\t");
-    Serial.println(0);
-  }
-  delay(50);
+  // pressure.update();
+  // // pressure.printData();
+  // Serial.print(pressure.getPressure());
+  // Serial.print("\t");
+  // if(pressure.isTouch()) {
+  //   neopix.turnOn();
+  //   neopix.setColor(BLUE);
+  //   Serial.print(1);
+  //   Serial.print("\t");
+  //   Serial.println(-1);
+  // } else {
+  //   neopix.turnOff();
+  //   Serial.print(0);
+  //   Serial.print("\t");
+  //   Serial.println(0);
+  // }
+  // delay(50);
   // Serial.println(pressure.isTouch());
   
   // delay(50);
@@ -187,6 +186,7 @@ void loop()
     {
       dlyRec = 0;
       mpu.update();
+      pressure.update();  
 
       recorder.addRow();
       recorder.pushData<float>(mpu.ax);
@@ -198,6 +198,7 @@ void loop()
       recorder.pushData<float>(mpu.mx);
       recorder.pushData<float>(mpu.my);
       recorder.pushData<float>(mpu.mz);
+      recorder.pushData<float>(pressure.getPressure());
     }
   }
 
@@ -217,11 +218,13 @@ void loop()
       {
         isBtnHold = true;
         freezBlink(2);
-        if (!recorder.isRecording() && !isCallibrating)
+        if (!recorder.isRecording())
         {
-          isCallibrating = true;
+          Serial.println("-------------------");
+          Serial.println("START CALLIBRATION");
+          Serial.println("-------------------");
           mpu.magnometerCalibration();
-          isCallibrating = false;
+          button.reset(); // force reset
           neopix.blinkOn(100, 2);
           normalMode();
         }
@@ -231,7 +234,7 @@ void loop()
 }
 
 void normalMode() {
-  // neopix.setColor(colOn);
+  neopix.setColor(colOn);
 }
 
 void startRecord()
