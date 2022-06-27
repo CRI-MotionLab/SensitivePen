@@ -1,4 +1,5 @@
 #include <elapsedMillis.h>
+#include "WiFi.h"
 
 #include "_MOVUINO_ESP32/_MPU9250.h"
 #include "_MOVUINO_ESP32/_Button.h"
@@ -21,10 +22,12 @@
 #define CMD_STOP_RECORD 's'  // Stop the record
 #define CMD_LISTING_DIR 'l'  // List files in the directory
 #define CMD_SPIFF_INFO 'i'   // Get informations about the spiff
+#define CMD_BATTERY_LEVEL 'b'// Get battery level info
 
 #define BATTERY_PIN 36       // Used to read the battery level
 #define BATTERY_MIN_VAL 1900 // ~3.3v
 #define BATTERY_MAX_VAL 2500 // ~4.2v
+#define SPIFFS_FULL_TH  70   // ~1.1 / 1.5 MB
 
 MovuinoMPU9250 mpu = MovuinoMPU9250();
 MovuinoButton button = MovuinoButton();
@@ -60,10 +63,15 @@ void setup()
   neopix.update();
   
   // Other
+  WiFi.mode( WIFI_OFF ); // Turn off WiFi
+  btStop(); // Turn off Bluetooth
   mpu.begin();
   button.begin();
   recorder.begin();
   freezBlink(4);
+  recorder.printStateSPIFFS();
+  if (recorder.getUsedSpace() > SPIFFS_FULL_TH) // Flash red if the SPIFF memory is full
+    freezColorStrob(20, RED);
 }
 
 void loop()
@@ -113,6 +121,8 @@ void loop()
       break;
     case CMD_STOP_RECORD:
       stopRecord();
+    case CMD_BATTERY_LEVEL:
+      showBatteryLevel();
       break;
     default:
       break;
@@ -193,7 +203,12 @@ void normalMode() {
 
 void startRecord()
 {
-  recorder.newRecord(recordId);
+  if (recorder.newRecord(recordId)) // If the file couldn't be open for writing, most likely because the SPIFFS is full
+  {
+    freezColorStrob(20, RED);
+    Serial.println("Could not start new recording");
+    return;
+  }
   recorder.defineColumns(colsId);
   
   freezColorStrob(2, RED);
